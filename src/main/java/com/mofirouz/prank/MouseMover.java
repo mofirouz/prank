@@ -15,14 +15,19 @@ public class MouseMover {
         robot = new Robot();
     }
 
-    public void move(int pixelsToMove, int speed) throws InterruptedException {
+    public void move(int distance, int speed, boolean jiggle) throws InterruptedException {
         double screenSizeWidth = screenSize.getWidth();
         double screenSizeHeight = screenSize.getHeight();
 
         boolean xNegative = random.nextBoolean();
         boolean yNegative = random.nextBoolean();
 
-        while (pixelsToMove > 0) {
+        while (distance > 0) {
+            if (jiggle) {
+                xNegative = random.nextBoolean();
+                yNegative = random.nextBoolean();
+            }
+
             PointerInfo mouseInfo = MouseInfo.getPointerInfo();
             Point currentPos = mouseInfo.getLocation();
             int mouseX = currentPos.x;
@@ -45,7 +50,7 @@ public class MouseMover {
 
             robot.mouseMove(mouseX, mouseY);
             Thread.sleep(speed);
-            pixelsToMove--;
+            distance--;
         }
     }
 }
