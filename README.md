@@ -15,6 +15,7 @@ _Prank Properties_
 List of properties are given below:
 - `QUIT` - If set, will terminate the application. (have to be in capital)
 - `PAUSE=false` - Will pause the script. Will have the same effect as removing stop file.
+- `sleep=5000` - Will run the script every Xms (1 - Integer.MAX)). (Higher number, slower speed)
 - `speed=100` - Speed that the cursor will move (1 - 30000ms) (Higher number, slower speed)
 - `distance=100` - Distance that the cursor will move (1px - 1000px)
 - `jiggle=true` - Will re-evaluate whether to move the mouse negative or positive in X/Y position for every movement.
