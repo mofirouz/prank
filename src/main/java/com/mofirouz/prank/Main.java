@@ -1,10 +1,14 @@
 package com.mofirouz.prank;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 import static java.nio.charset.Charset.defaultCharset;
@@ -16,11 +20,13 @@ public class Main {
     public static String DISTANCE = "distance";
     public static String JIGGLE = "jiggle";
 
-    private final static File configFile = new File(Main.class.getResource("/prank.config").getFile());
-    private static String[] configs;
-
     public static void main(String[] args) throws AWTException, InterruptedException, IOException {
-        configs = Files.toString(Main.configFile, defaultCharset()).split(System.getProperty("line.separator"));
+        new Main();
+    }
+
+    private Main() throws AWTException, InterruptedException, IOException {
+        InputStream configFile = getClass().getClassLoader().getResourceAsStream("prank.config");
+        String[] configs = CharStreams.toString(new InputStreamReader(configFile, Charsets.UTF_8)).split(System.getProperty("line.separator"));
         SambaFileMonitor sambaFileMonitor = new SambaFileMonitor(configs[0], configs[1]);
         Properties prop = new Properties();
         MouseMover mouseMover = new MouseMover();
@@ -43,7 +49,5 @@ public class Main {
             }
             Thread.sleep(5000);
         }
-
-
     }
 }
